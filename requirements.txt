@@ -1,0 +1,12 @@
+SQLAlchemy==1.4.20
+pydantic~=1.8.1
+python-multipart
+fastapi==0.66.0
+uvicorn==0.14.0
+PyMySQL~=1.0.2
+aiofiles
+cryptography
+python-jose
+passlib[bcrypt]~=1.7.4
+Pillow==8.3.1
+locust==1.6.0
