@@ -150,3 +150,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 .idea
+
+# all pycache
+app/__pycache__

@@ -1,11 +1,13 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from User.UserRouter import router as UserRouter
 
 app = FastAPI(
     title="SuperCar Backend API",
     version="0.0.1"
 )
+app.include_router(UserRouter)
 
 app.add_middleware(
     CORSMiddleware,
