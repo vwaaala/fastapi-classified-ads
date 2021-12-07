@@ -1,10 +1,11 @@
 from typing import List
+
 import sqlalchemy
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.User.UserSchema import CreateUser
-from app.User.UserModel import User
+from User.UserModel import User
+from User.UserSchema import CreateUser
 
 
 def get_all_users(db: Session, skip: int = 0, limit: int = 12) -> List[User]:
@@ -16,10 +17,11 @@ def get_user(db: Session, username) -> User:
 
 
 def create_user(user: CreateUser, db: Session):
-    from app.Auth.AuthService import get_password_hash
+    from Auth.AuthService import get_password_hash
     user.password = get_password_hash(user.password)
     user_db_object = User(**user.dict())
     db.add(user_db_object)
+    # noinspection PyUnresolvedReferences
     try:
         db.commit()
         db.refresh(user_db_object)
@@ -27,10 +29,10 @@ def create_user(user: CreateUser, db: Session):
     except sqlalchemy.exc.IntegrityError:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
-            detail='User already exists'
+            detail='User already exists!'
         )
     except Exception:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail='Failed to create user'
+            detail='Failed to create user!'
         )
